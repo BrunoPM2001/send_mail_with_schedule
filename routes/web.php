@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ClientsController;
+use App\Http\Controllers\MailsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('sample');
-});
+Route::get('/sendMails', [ClientsController::class, 'getAllClients']);
+
+Route::post('/sendMails', [MailsController::class, 'sendMails'])->name('sendMails');

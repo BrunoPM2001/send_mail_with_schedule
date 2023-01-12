@@ -11,19 +11,21 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
 
-         <!--FontAwesome-->
+         <!-- FontAwesome-->
         <script src="https://kit.fontawesome.com/94b9c956da.js" crossorigin="anonymous"></script>
 
-        <!--Bootstrap 5-->
+        <!-- Bootstrap 5-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 
-        <!--DataTables-->
+        <!-- DataTables-->
         <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
 
-        <!--Jquery-->
+        <!-- Jquery-->
         <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+        <script src="/js/checkbox.js"></script>
     </head>
     <body>
         <div class="container mt-5">
@@ -32,7 +34,11 @@
                 <hr>
             </h3>
 
-            <form action="" method="">
+            <form action="{{ route('sendMails') }}" method="POST">
+                @csrf
+                @if (session('success'))
+                   <p>{{ session('success') }}</p>
+                @endif
                 <div class="row mb-5">
                     <div class="col-4">
                         <input type="checkbox" onclick="marcarCheckbox(this);" />
@@ -45,7 +51,7 @@
                     </div>
                     <div class="col-4">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-primary">Enviar correo(s)</button>
+                            <button type="submit" class="btn btn-primary">Enviar correo(s)</button>
                             <button type="button" class="btn btn-sm btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">    
                             </button>
                             <ul class="dropdown-menu">
@@ -60,17 +66,22 @@
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Elegir Fecha y Hora</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
 
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                        <button type="button" class="btn btn-primary">Enviar</button>
-                                    </div>
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Elegir Fecha y Hora</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <label for="asunto" class="form-label">Asunto:</label>
+                                            <input name="asunto" type="text" class="form-control" id="asunto" placeholder="Escriba el asunto de su correo"/>
+                                            <label for="contenido" class="form-label">Contenido:</label>
+                                            <textarea name="contenido" class="form-control" id="contenido" rows="5" placeholder="Escriba el contenido del correo"></textarea>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                            <button type="submit" class="btn btn-primary">Enviar</button>
+                                        </div>
+
                                 </div>
                             </div>
                         </div>
@@ -86,20 +97,27 @@
                                 <th>Cliente</th>
                                 <th>Email</th>
                                 <th>Estatus de Notificación</th>
+                                <th>Seleccionar</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
-                                    <input type="checkbox" name="correo[]" class="CheckedAK" correo="" value="" />
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <i class="zmdi zmdi-check-all zmdi-hc-2x green"></i>
-                                    <i class="zmdi zmdi-check zmdi-hc-2x black"></i>
-                                </td>
-                            </tr>
+                            @foreach ($clientes as $cliente)                                
+                                <tr>
+                                    <td>{{ $cliente->id }}</td>
+                                    <td>{{ $cliente->cliente }}</td>
+                                    <td>{{ $cliente->correo }}</td>
+                                    <td>
+                                        @if ($cliente->notificacion)
+                                            <i class="zmdi zmdi-check-all zmdi-hc-2x green"></i>
+                                        @else
+                                            <i class="zmdi zmdi-check zmdi-hc-2x black"></i>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" name="correos[{{ $cliente->id }}]" class="CheckedAK" value="{{ $cliente->correo }}" />
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
