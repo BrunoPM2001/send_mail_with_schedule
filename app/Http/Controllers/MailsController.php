@@ -11,7 +11,10 @@ class MailsController extends Controller
 {
     public function sendMails(Request $request)
     {
-        if ($request->fecha == null) {
+        if ($request->correos == null) {
+            return "Error, no haz seleccionado ningún destinatario";
+        }
+        if ($request->fecha == null && $request->hora == null) {
             //  Cuando se hace el envío al instante
             $correos = $request->correos;
             $asunto = $request->asunto;
@@ -28,6 +31,7 @@ class MailsController extends Controller
             $asunto = $request->asuntoF;
             $contenido = $request->contenidoF;
             $fecha = $request->fecha;
+            $hora = $request->hora;
         
             foreach ($ids as $id){
                 $futureMail = new FutureMail;
@@ -35,6 +39,7 @@ class MailsController extends Controller
                 $futureMail->asunto = $asunto;
                 $futureMail->contenido = $contenido;
                 $futureMail->fecha_envio = $fecha;
+                $futureMail->hora_envio = $hora;
                 $futureMail->save();
                 print_r("Un mensaje programado correctamente");
             }

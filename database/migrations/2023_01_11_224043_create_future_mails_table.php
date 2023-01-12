@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string("asunto")->nullable(false);
             $table->string("contenido", 1000)->nullable(false);
             $table->date('fecha_envio')->nullable(false);
+            $table->time('hora_envio', 0)->nullable(false);
             $table->boolean('estado_envio')->default(false);
             $table->timestamps();
         });

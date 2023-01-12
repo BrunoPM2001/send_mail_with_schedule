@@ -76,12 +76,14 @@
                                             <input name="asuntoF" type="text" class="form-control" id="asuntoF" placeholder="Escriba el asunto de su correo"/>
                                             <label for="contenidoF" class="form-label">Contenido:</label>
                                             <textarea name="contenidoF" class="form-control" id="contenidoF" rows="5" placeholder="Escriba el contenido del correo"></textarea>
-                                            <label for="fecha" class="form-label">Fecha:</label>
+                                            <label for="fecha" class="form-label">Fecha de envío:</label>
                                             <input name="fecha" type="date" class="form-control" id="fecha" placeholder="Escriba la fecha de envío"/>
+                                            <label for="hora" class="form-label">Hora de envío:</label>
+                                            <input name="hora" type="time" class="form-control" id="hora" placeholder="Escriba la hora de envío"/>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                            <button type="submit" class="btn btn-primary">Enviar</button>
+                                            <button type="submit" class="btn btn-primary">Programar envío</button>
                                         </div>
 
                                 </div>
