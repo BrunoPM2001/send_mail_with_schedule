@@ -51,24 +51,49 @@
                     </div>
                     <div class="col-4">
                         <div class="btn-group">
-                            <button type="submit" class="btn btn-primary">Enviar correo(s)</button>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#enviarAhora">Enviar correo(s)</button>
                             <button type="button" class="btn btn-sm btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">    
                             </button>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <a type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#programarEnvio">
                                         Programar Horario
                                     </a>
                                 </li>
                             </ul>
                         </div>
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <!-- Modal para programar envíos -->
+                        <div class="modal fade" id="programarEnvio" tabindex="-1" aria-labelledby="programarEnvioLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
 
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Elegir Fecha y Hora</h5>
+                                            <h5 class="modal-title" id="programarEnvioLabel">Elegir Fecha y Hora</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <label for="asuntoF" class="form-label">Asunto:</label>
+                                            <input name="asuntoF" type="text" class="form-control" id="asuntoF" placeholder="Escriba el asunto de su correo"/>
+                                            <label for="contenidoF" class="form-label">Contenido:</label>
+                                            <textarea name="contenidoF" class="form-control" id="contenidoF" rows="5" placeholder="Escriba el contenido del correo"></textarea>
+                                            <label for="fecha" class="form-label">Fecha:</label>
+                                            <input name="fecha" type="date" class="form-control" id="fecha" placeholder="Escriba la fecha de envío"/>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                            <button type="submit" class="btn btn-primary">Enviar</button>
+                                        </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal para enviar ahora-->
+                        <div class="modal fade" id="enviarAhora" tabindex="-1" aria-labelledby="enviarAhoraLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="enviarAhoraLabel">Elegir Fecha y Hora</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
